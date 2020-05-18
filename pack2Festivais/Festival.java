@@ -54,7 +54,7 @@ public class Festival extends Evento {
 		for (int i = 0; i < eventos.length; i++) {
 			if(eventos[i] != null) {
 				if(!artistList.contains(eventos[i].getArtistas())) {
-					artistList.add(eventos[i].getArtistas());
+					//artistList.add(eventos[i].getArtistas());
 				}
 			}
 		}
@@ -76,7 +76,7 @@ public class Festival extends Evento {
 	
 	public boolean delEvento(String nomeEvento) {
 		for (int i = 0; i < eventos.length; i++) {
-			if(nomeEvento.equalsIgnoreCase((Evento)Espetaculo[i].getTitulo()) eventos[i] = null;
+			//if(nomeEvento.equalsIgnoreCase((Evento)Espetaculo[i].getTitulo()) eventos[i] = null;
 			return true;
 		}
 		return false;
