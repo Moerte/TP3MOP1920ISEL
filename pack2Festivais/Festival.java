@@ -1,5 +1,10 @@
 package tps.tp3.pack2Festivais;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
 
 /**
  * TODO - Comentar o código
@@ -45,7 +50,14 @@ public class Festival extends Evento {
 
 	@Override
 	public String[] getArtistas() {
-		//TODO
+		List<String> artistList = new ArrayList<String>();
+		for (int i = 0; i < eventos.length; i++) {
+			if(eventos[i] != null) {
+				if(!artistList.contains(eventos[i].getArtistas())) {
+					artistList.add(eventos[i].getArtistas());
+				}
+			}
+		}
 		return null;
 	}
 
@@ -55,16 +67,26 @@ public class Festival extends Evento {
 	}
 
 	public boolean addEvento(Evento evento) {
-		//TODO
+		for (int i = 0; i < eventos.length; i++) {
+			if(eventos[i] == null) eventos[i] = evento;
+			return true;
+		}
 		return false;
 	}
 	
 	public boolean delEvento(String nomeEvento) {
-		//TODO  
+		for (int i = 0; i < eventos.length; i++) {
+			if(nomeEvento.equalsIgnoreCase((Evento)Espetaculo[i].getTitulo()) eventos[i] = null;
+			return true;
+		}
 		return false;
 	}
 
 	public static void main(String[] args) {
+		
+		Espetaculo E1 = new Espetaculo("Os Melhores Momentos 2020", "Seixal", 22);
+		
+		
 
 	}
 
