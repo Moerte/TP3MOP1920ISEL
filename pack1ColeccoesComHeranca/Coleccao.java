@@ -3,53 +3,50 @@ package tps.tp3.pack1ColeccoesComHeranca;
 import java.util.Arrays;
 
 
+
 /**
- * Classe Coleccao, deve conter a descriÃ§Ã£o de uma colecÃ§Ã£o, com tÃ­tulo, os seus
- * livros, colecÃ§Ãµes e editores. Deve utilizar heranÃ§a para guardar os livros e
- * as colecÃ§Ãµes num sÃ³ array
+ * Classe Coleccao, deve conter a descrição de uma colecção, com título, os seus
+ * livros, colecções e editores. Deve utilizar herança para guardar os livros e
+ * as colecções num só array
  */
 public class Coleccao extends Obra {
-	// prefixo a colocar no inÃ­cio de cada print mais interno que o corrente
+	// prefixo a colocar no início de cada print mais interno que o corrente
 	public static final String GENERALPREFIX = "  ";
 
-	// nÃºmero mÃ¡ximo de obras de uma colecÃ§Ã£o
+	// número máximo de obras de uma colecção
 	private static int MAXOBRAS = 20;
 
-	// Array de obras, de Livros ou ColeccÃ§Ãµe, em que estas devem encontrar-se
-	// sempre nos menores Ã­ndices e pela ordem de registo
+	// Array de obras, de Livros ou Coleccçõe, em que estas devem encontrar-se
+	// sempre nos menores índices e pela ordem de registo
 	private Obra[] obras = new Obra[MAXOBRAS];
-	private Livro[] livros = new Livro[MAXOBRAS];
-	private Coleccao[] coleccoes = new Coleccao[MAXOBRAS];
 	
 
-	// deverÃ¡ conter sempre o nÃºmero de obras na colecÃ§Ã£o
+	// deverá conter sempre o número de obras na colecção
 	private int numObras = 0;
-	private int numLivros = 0;
-	private int numColeccoes = 0;
 
 	// Editores, tem as mesmas condicionantes que array de autores na classe
 	// livro
 	private String[] editores;
 
 	/**
-	 * Construtor; o tÃ­tulo deve ser guardado e validado na clase obra; o array de
-	 * editores devem ser pelo menos um e tem as mesmas restriÃ§Ãµes que os autores
+	 * Construtor; o título deve ser guardado e validado na clase obra; o array de
+	 * editores devem ser pelo menos um e tem as mesmas restrições que os autores
 	 * dos livros;
 	 */
 	public Coleccao(String titulo, String[] editores) {
-		// TODO
+		
 		super(titulo);
 		if (titulo == null || titulo.length() == 0)
 			throw new IllegalArgumentException("O titulo tem de ter pelo menos um caracter");
 		if (!Obra.validarNome(titulo))
-			throw new IllegalArgumentException("O nome do tÃ­tulo Ã© invÃ¡lido");
+			throw new IllegalArgumentException("O nome do título é inválido");
 
 		if(editores == null || editores.length < 1)
-			throw new IllegalArgumentException("A coleÃ§Ã£o tem de ter pelo menos um editor");
+			throw new IllegalArgumentException("A coleção tem de ter pelo menos um editor");
 		if(!Obra.validarNomes(editores))
-			throw new IllegalArgumentException("O editor tem de ter o nome vÃ¡lido");
+			throw new IllegalArgumentException("O editor tem de ter o nome válido");
 		if(!Obra.haRepeticoes(editores))
-			throw new IllegalArgumentException("O array de editores contÃ©m editores repetidos");
+			throw new IllegalArgumentException("O array de editores contém editores repetidos");
 		for (int i = 0; i < editores.length; i++) {
 			editores[i] = Obra.removeExtraSpaces(editores[i]);
 		}
@@ -58,8 +55,8 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * Obtem o nÃºmero total de pÃ¡ginas da colecÃ§Ã£o, pÃ¡ginas dos livros e das
-	 * colecÃ§Ãµes
+	 * Obtem o número total de páginas da colecção, páginas dos livros e das
+	 * colecções
 	 */
 	public int getNumPaginas() {
 		
@@ -72,11 +69,11 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * As colecÃ§Ãµes com mais de 5000 pÃ¡ginas nos seus livros directos tÃªm um
-	 * desconto de 20% nesses livros. As colecÃ§Ãµes em que o somatÃ³rio de pÃ¡ginas das
-	 * suas subcolecÃ§Ãµes directas seja igual ou superior ao quÃ¡druplo do nÂº de
-	 * pÃ¡ginas da sua subcolecÃ§Ã£o directa com mais pÃ¡ginas deverÃ£o aplicar um
-	 * desconto de 10% sobre os preÃ§os das suas subcolecÃ§Ãµes
+	 * As colecções com mais de 5000 páginas nos seus livros directos têm um
+	 * desconto de 20% nesses livros. As colecções em que o somatório de páginas das
+	 * suas subcolecções directas seja igual ou superior ao quádruplo do nº de
+	 * páginas da sua subcolecção directa com mais páginas deverão aplicar um
+	 * desconto de 10% sobre os preços das suas subcolecções
 	 */
 
 	public float getPreco() {
@@ -96,13 +93,13 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * Adiciona uma obra Ã  colecÃ§Ã£o se puder, se esta nÃ£o for null e a colecÃ§Ã£o nÃ£o
-	 * ficar com obras com iguais no seu nÃ­vel imediato. Deve utilizar o mÃ©todo
+	 * Adiciona uma obra à colecção se puder, se esta não for null e a colecção não
+	 * ficar com obras com iguais no seu nível imediato. Deve utilizar o método
 	 * getIndexOfLivro e getIndexOfColeccao
 	 */
 	public boolean addObra(Obra l1) {
-		// TODO
-		if (l1 != null && getIndexOfObra(l1.getTitulo()) == -1 /*&& getIndexOfColeccao(l1.getTitulo()) == -1*/) {
+	
+		if (l1 != null && getIndexOfObra(l1.getTitulo()) == -1) {
 			for (int i = 0; i < this.obras.length; i++) {
 				if (this.obras[i] == null) {
 					this.obras[i] = l1;
@@ -117,10 +114,10 @@ public class Coleccao extends Obra {
 
 	/**
 	 * Devolve o index no array de obras onde estiver a obra com o nome pretendido.
-	 * Devolve -1 caso nÃ£o o encontre
+	 * Devolve -1 caso não o encontre
 	 */
 	private int getIndexOfObra(String titulo) {
-		// TODO
+		
 		int index = -1;
 		for (int i = 0; i < getNumLivros(); i++) {
 			if (this.obras[i] != null) {
@@ -132,13 +129,13 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * Remove do array a obra com o tÃ­tulo igual ao tÃ­tulo recebido. Devolve a obra
-	 * removida ou null caso nÃ£o tenha encontrado a obra. Deve-se utilizar o mÃ©todo
-	 * getIndexOfLivro. Recorda-se que as obras ocupam sempre os menores Ã­ndices, ou
-	 * seja, nÃ£o pode haver nulls entre elas.
+	 * Remove do array a obra com o título igual ao título recebido. Devolve a obra
+	 * removida ou null caso não tenha encontrado a obra. Deve-se utilizar o método
+	 * getIndexOfLivro. Recorda-se que as obras ocupam sempre os menores índices, ou
+	 * seja, não pode haver nulls entre elas.
 	 */
 	public Obra remObra(String titulo) {
-		// TODO
+		
 		int index = getIndexOfObra(titulo);
 		Obra toRemove = (index == -1) ? null : this.obras[index];
 		if (index > -1) {
@@ -157,108 +154,73 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * Remove todas as obras (livros ou colecÃ§Ãµes) dentro da obra corrente, que
-	 * tenham um tÃ­tulo igual ou tÃ­tulo recebido. Devolve true se removeu pelo menos
-	 * uma obra, ou false caso nÃ£o tenha trealizado qualquer remoÃ§Ã£o. Deve utilizar
-	 * os mÃ©todos remObra e remAllObra.
+	 * Remove todas as obras (livros ou colecções) dentro da obra corrente, que
+	 * tenham um título igual ou título recebido. Devolve true se removeu pelo menos
+	 * uma obra, ou false caso não tenha trealizado qualquer remoção. Deve utilizar
+	 * os métodos remObra e remAllObra.
 	 */
 	public boolean remAllObra(String titulo) {
-		// TODO
+		
 		return false;
 	}
 
 	/**
-	 * Devolve o nÂº de obras de uma pessoa. Cada colecÃ§Ã£o deve contabilizar-se como
+	 * Devolve o nº de obras de uma pessoa. Cada colecção deve contabilizar-se como
 	 * uma obra para os editores.
 	 */
 	public int getNumObrasFromPerson(String autorEditor) {
+
 		int countLivros = 0;
 		String[] autoreEditores = getAutoresEditores();
 		for (int i = 0; i < autoreEditores.length; i++) {
 			if (autorEditor.equals(autoreEditores[i]))
 				countLivros++;
 		}
-		for (int i = 0; i < numLivros; i++) {
-			if (this.livros[i] != null) {
-				if (this.livros[i].contemAutor(autorEditor))
+		for (int i = 0; i < numObras; i++) {
+			if (this.obras[i] != null) {
+				if (this.obras[i].equals(autorEditor))
 					countLivros++;
 			}
-		}
-		for (int i = 0; i < numColeccoes; i++) {
-			if (this.coleccoes[i] != null) {
-				autoreEditores = this.coleccoes[i].getAutoresEditores();
-				for (int j = 0; j < autoreEditores.length; j++) {
-					if (autorEditor.equals(autoreEditores[j])) {
-						countLivros++;
-					}
-				}
-				for (int j = 0; j < this.coleccoes[i].livros.length; j++) {
-					if (this.coleccoes[i].livros[j] != null) {
-						if (this.coleccoes[i].livros[j].contemAutor(autorEditor))
-							countLivros++;
-					}
-				}
-			}
+		
 		}
 		return countLivros;
 	}
+	
 
 	/**
-	 * Deve devolver um novo array, sem repetiÃ§Ãµes, com os livros de que o autor
-	 * recebido Ã© autor. O array devolvido nÃ£o deve conter repetiÃ§Ãµes, para excluir
-	 * as repetiÃ§Ãµes devem utilizar o mÃ©todo mergeWithoutRepetitions
+	 * Deve devolver um novo array, sem repetições, com os livros de que o autor
+	 * recebido é autor. O array devolvido não deve conter repetições, para excluir
+	 * as repetições devem utilizar o método mergeWithoutRepetitions
 	 */
 	public Livro[] getLivrosComoAutor(String autorNome) {
-		int count = 0, k = 0;
-		for (int i = 0; i < numLivros; i++) {
-			if (this.livros[i] != null) {
-				if (this.livros[i].contemAutor(autorNome))
+		int count = 0;
+		for (int i = 0; i < this.obras.length; i++) {
+			if (this.obras[i] != null) {
+				if (this.obras[i].equals(autorNome))
 					count++;
 			}
 		}
-		for (int i = 0; i < numColeccoes; i++) {
-			if (this.coleccoes[i] != null) {
-				for (int j = 0; j < this.coleccoes[i].livros.length; j++) {
-					if (this.coleccoes[i].livros[j] != null) {
-						if (this.coleccoes[i].livros[j].contemAutor(autorNome))
-							count++;
-					}
-				}
-			}
-		}
-
 		Livro[] newList = new Livro[count];
-		for (int i = 0; i <numLivros; i++) {
-			if (this.livros[i] != null) {
-				if (this.livros[i].contemAutor(autorNome)) {
-					newList[i] = this.livros[i];
-					k++;
-				}
-			}
-		}
-		for (int i = 0; i < numColeccoes; i++) {
-			if (this.coleccoes[i] != null) {
-				for (int j = 0; j < this.coleccoes[i].livros.length; j++) {
-					if (this.coleccoes[i].livros[j] != null) {
-						if (this.coleccoes[i].livros[j].contemAutor(autorNome))
-							newList[k++] = this.coleccoes[i].livros[j];
-					}
-				}
+		for (int i = 0; i < numObras; i++) {
+			if (this.obras[i] != null) {
+				if (this.obras[i].equals(autorNome))
+					newList[i] = (Livro) obras[i];
 			}
 		}
 		return newList;
+		//return null;
 	}
 
 	/**
 	 * Deve devolver um array, sem nulls, com todos os autores e editores existentes
-	 * na colecÃ§Ã£o. O resultado nÃ£o deve conter repetiÃ§Ãµes. Deve utilizar o mÃ©todo
+	 * na colecção. O resultado não deve conter repetições. Deve utilizar o método
 	 * mergeWithoutRepetitions
 	 */
 	public String[] getAutoresEditores() {
-		String[] aux1 = new String[this.livros.length];
-		for (int i = 0; i < numLivros; i++) {
-			if (this.livros[i] != null) {
-				String[] aux = this.livros[i].getAutores();
+		String[] aux1 = new String[this.obras.length];
+		for (int i = 0; i < numObras; i++) {
+			if (this.obras[i] != null) {
+				String[] aux = this.obras[i].getAutores();
 				for (int j = 0; j < aux.length; j++) {
 					aux1[i] = aux[j];
 				}
@@ -266,11 +228,12 @@ public class Coleccao extends Obra {
 		}
 		String[] result = mergeWithoutRepetitions(this.editores, aux1);
 		return result;
+		//return null;
 	}
 
 	/**
-	 * MÃ©todo que recebendo dois arrays sem repetiÃ§Ãµes devolve um novo array com
-	 * todos os elementos dos arrays recebidos mas sem repetiÃ§Ãµes
+	 * Método que recebendo dois arrays sem repetições devolve um novo array com
+	 * todos os elementos dos arrays recebidos mas sem repetições
 	 */
 	private static String[] mergeWithoutRepetitions(String[] a1, String[] a2) {
 		
@@ -306,7 +269,7 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * MÃ©todo idÃªntico ao mÃ©todo anterior mas agora com arrays de livros
+	 * Método idêntico ao método anterior mas agora com arrays de livros
 	 */
 	private static Livro[] mergeWithoutRepetitions(Livro[] a1, Livro[] a2) {
 		
@@ -342,28 +305,72 @@ public class Coleccao extends Obra {
 	}
 
 	/**
-	 * Devolve o nÂº de livros dentro da colecÃ§Ã£o
+	 * Devolve o nº de livros dentro da colecção
 	 */
 	public int getNumLivros() {
-		
+		// TODO
 		return this.numObras;
 	}
 
 	/**
-	 * Devolve o nÂº de colecÃ§Ãµes dentro da colecÃ§Ã£o
+	 * Devolve o nº de colecções dentro da colecção
 	 */
 	public int getNumColeccoes() {
 		// TODO
-		return this.numColeccoes;
+		/*if (numColeccoes == 0)
+			return 0;
+
+		// para conter o valor mínimo dos stocks de todos os produtos
+		int minStock = 0;
+
+		// inicializar o minStock com o stock do primeiro produto
+		int i = 0;
+		for (; i < coleccoes.length; i++) {
+			if (coleccoes[i] != null) {
+				minStock = coleccoes[i].getNumColeccoes();
+				i++;
+				break;
+			}
+		}
+
+		// percorrer o array até se ter consultado os nProdutos produtos
+		for (int nprods = 1; i < coleccoes.length && nprods < numColeccoes; i++) {
+			if (coleccoes[i] != null) {
+				// se este produto tiver um stock inferior ao mínimo, colocá-lo
+				// como mínimo
+				if (coleccoes[i].getNumColeccoes() < minStock)
+					minStock = coleccoes[i].getNumColeccoes();
+			}
+		}
+		return minStock;*/
+		/*int total = 0;
+		for (int i = 0, nprods = 0; i < coleccoes.length && nprods < numColeccoes; i++) {
+			if (obras[i] != null) {
+
+				if (coleccoes[i] instanceof Coleccao) {
+					// fazer o cast para produto composto
+					Coleccao pc = (Coleccao) obras[i];
+					// obter o número de produtos compostos dentro desse produto
+					// composto, contar com ele mesmo
+					total += 1 + pc.getNumColeccoes();
+				}
+
+			}
+		}
+		return total;*/
+		return 0;
+		
+		
 	}
 
 	/**
-	 * Devolve a profundidada de mÃ¡xima de uma colecÃ§Ã£o em termos de coleccÃµes
-	 * dentro de coleccÃ§Ãµes: uma colecÃ§Ã£o c1 com uma colecÃ§Ã£o c2 dentro, c1 deve
-	 * devolver 2 e c2 deve devolver 1, independentemente do nÃºmero do conteÃºdo de
+	 * Devolve a profundidada de máxima de uma colecção em termos de coleccões
+	 * dentro de coleccções: uma colecção c1 com uma colecção c2 dentro, c1 deve
+	 * devolver 2 e c2 deve devolver 1, independentemente do número do conteúdo de
 	 * cada uma.
 	 */
 	public int getProfundidade() {
+		
 		int total = 0;
 		total += 1;
 		for (int i = 0; i < obras.length ; i++) {
@@ -372,33 +379,31 @@ public class Coleccao extends Obra {
 					total += c.getProfundidade();
 			}
 		}
-		return total;
+		return total;		
 	}
 
 	/**
-	 * Duas colecÃ§Ãµes sÃ£o iguais se tiverem o mesmo tÃ­tulo e a mesma lista de
+	 * Duas colecções são iguais se tiverem o mesmo título e a mesma lista de
 	 * editores. Deve utilizar o equals da classe Obra. Para verificar verificar se
-	 * os editores sÃ£o os mesmos devem utilizar o mÃ©todo mergeWithoutRepetitions
+	 * os editores são os mesmos devem utilizar o método mergeWithoutRepetitions
 	 */
 	public boolean equals(Object c) {
-
 		/*String[] test = mergeWithoutRepetitions(this.editores, c.editores);
-		return (c != null) && getTitulo().equalsIgnoreCase(((Obra) c).getTitulo())
+		return (c != null) && getTitulo().equalsIgnoreCase(c.getTitulo())
 				&& (test.length == this.editores.length && test.length == c.editores.length);*/
-		return (c != null) && this.getTitulo().equalsIgnoreCase(((Obra) c).getTitulo());
-		
+		return true;
 	}
 
 	/**
-	 * Deve devolver uma string compatÃ­vel com os outputs desejados
+	 * Deve devolver uma string compatível com os outputs desejados
 	 */
 	public String toString() {
 		
-		return super.toString() + Arrays.toString(getAutoresEditores()) + ", com " + getNumLivros() + " livros, com " + getNumColeccoes() + " coleÃ§Ãµes e com profundidade mÃ¡xima de " + getProfundidade();
+		return super.toString() + Arrays.toString(getAutoresEditores()) + ", com " + getNumLivros() + " livros, com " + getNumColeccoes() + " coleções e com profundidade máxima de " + getProfundidade();
 	}
 
 	/**
-	 * Mostra uma colecÃ§Ã£o segundo os outputs desejados. Deve utilizar o mÃ©todo
+	 * Mostra uma colecção segundo os outputs desejados. Deve utilizar o método
 	 * print da classe Obra.
 	 */
 	public void print(String prefix) {
@@ -406,8 +411,8 @@ public class Coleccao extends Obra {
 		for (int j = 0; j < this.obras.length; j++) {
 			if(this.obras[j] != null) this.obras[j].print(" "+prefix);
 		}
-		for (int i = 0; i < numColeccoes; i++) {
-			if(this.coleccoes[i] != null) this.coleccoes[i].print(" "+ prefix);
+		for (int i = 0; i < numObras; i++) {
+			if(this.obras[i] != null) this.obras[i].print(" "+ prefix);
 		}
 	}
 
@@ -415,10 +420,10 @@ public class Coleccao extends Obra {
 	 * main
 	 */
 	public static void main(String[] args) {
-		Livro l1 = new Livro("Viagem aos Himalaias", 340, 12.3f, new String[] { "JoÃ£o MendonÃ§a", "MÃ¡rio Andrade" });
-		Livro l2 = new Livro("Viagem aos PirinÃ©us", 270, 11.5f, new String[] { "JoÃ£o MendonÃ§a", "JÃºlio Pomar" });
+		Livro l1 = new Livro("Viagem aos Himalaias", 340, 12.3f, new String[] { "João Mendonça", "Mário Andrade" });
+		Livro l2 = new Livro("Viagem aos Pirinéus", 270, 11.5f, new String[] { "João Mendonça", "Júlio Pomar" });
 
-		Coleccao c1 = new Coleccao("Primavera", new String[] { "JoÃ£o MendonÃ§a", "Manuel Alfazema" });
+		Coleccao c1 = new Coleccao("Primavera", new String[] { "João Mendonça", "Manuel Alfazema" });
 
 		boolean res;
 
@@ -428,26 +433,26 @@ public class Coleccao extends Obra {
 		c1.print("");
 		System.out.println();
 
-		// adicionar um livro com nome de outro jÃ¡ existente
+		// adicionar um livro com nome de outro já existente
 		res = c1.addObra(l2);
-		System.out.println("adiÃ§Ã£o novamente de Viagem aos PirinÃ©us a c1 -> " + res);
+		System.out.println("adição novamente de Viagem aos Pirinéus a c1 -> " + res);
 		System.out.println("c1 -> " + c1);
 		System.out.println();
 
-		// Outra colecÃ§Ã£o
-		Livro l21 = new Livro("Viagem aos Himalaias 2", 340, 12.3f, new String[] { "JoÃ£o MendonÃ§a", "MÃ¡rio Andrade" });
-		Livro l22 = new Livro("Viagem aos PirinÃ©us 2", 270, 11.5f, new String[] { "JoÃ£o MendonÃ§a", "JÃºlio Pomar" });
+		// Outra colecção
+		Livro l21 = new Livro("Viagem aos Himalaias 2", 340, 12.3f, new String[] { "João Mendonça", "Mário Andrade" });
+		Livro l22 = new Livro("Viagem aos Pirinéus 2", 270, 11.5f, new String[] { "João Mendonça", "Júlio Pomar" });
 
-		Coleccao cx2 = new Coleccao("Outono", new String[] { "JoÃ£o MendonÃ§a", "Manuel Antunes" });
+		Coleccao cx2 = new Coleccao("Outono", new String[] { "João Mendonça", "Manuel Antunes" });
 		cx2.addObra(l21);
 		cx2.addObra(l22);
 		System.out.println("cx2 -> " + cx2);
 		cx2.print("");
 		System.out.println();
 
-		// adicionÃ¡-la a c1
+		// adicioná-la a c1
 		c1.addObra(cx2);
-		System.out.println("c1 apÃ³s adiÃ§Ã£o da colecÃ§Ã£o cx2 -> " + c1);
+		System.out.println("c1 após adição da colecção cx2 -> " + c1);
 		c1.print("");
 		System.out.println();
 
@@ -457,32 +462,32 @@ public class Coleccao extends Obra {
 		System.out.println();
 
 		// getNumObrasFromPerson
-		String nome = "JoÃ£o MendonÃ§a";
+		String nome = "João Mendonça";
 		int n = c1.getNumObrasFromPerson(nome);
-		System.out.println("NÂº de obras de " + nome + " -> " + n);
+		System.out.println("Nº de obras de " + nome + " -> " + n);
 		System.out.println();
 
 		// getLivrosComoAutor
-		nome = "JoÃ£o MendonÃ§a";
+		nome = "João Mendonça";
 		Livro[] livros = c1.getLivrosComoAutor(nome);
 		System.out.println("Livros de " + nome + " -> " + Arrays.toString(livros));
 		System.out.println();
 		System.out.println();
 
-		// testes aos mÃ©todos getNumLivros, getNumColeccoes e getProfundidade
+		// testes aos métodos getNumLivros, getNumColeccoes e getProfundidade
 		c1.print("");
-		System.out.println("NÂº de livros na colecÃ§Ã£o " + c1.getTitulo() + " -> " + c1.getNumLivros());
+		System.out.println("Nº de livros na colecção " + c1.getTitulo() + " -> " + c1.getNumLivros());
 
-		System.out.println("NÂº de colecÃ§Ãµes dentro da colecÃ§Ã£o " + c1.getTitulo() + " -> " + c1.getNumColeccoes());
+		System.out.println("Nº de colecções dentro da colecção " + c1.getTitulo() + " -> " + c1.getNumColeccoes());
 
-		System.out.println("Profundidade da colecÃ§Ã£o " + c1.getTitulo() + " -> " + c1.getProfundidade());
-		System.out.println("Profundidade da colecÃ§Ã£o " + cx2.getTitulo() + " -> " + cx2.getProfundidade());
+		System.out.println("Profundidade da colecção " + c1.getTitulo() + " -> " + c1.getProfundidade());
+		System.out.println("Profundidade da colecção " + cx2.getTitulo() + " -> " + cx2.getProfundidade());
 		System.out.println();
 
 		// rem livro
 		String nomeLivro = "Viagem aos Himalaias";
 		Obra l = c1.remObra(nomeLivro);
-		System.out.println("RemoÃ§Ã£o de " + nomeLivro + " -> " + l);
+		System.out.println("Remoção de " + nomeLivro + " -> " + l);
 		c1.print("");
 
 	}
