@@ -17,6 +17,10 @@ public abstract class Evento {
 		this.nome = nome;
 	}
 	
+	public String getNome() {
+		return this.nome;
+	}
+	
 	public abstract int getNumBilhetes();
 	
 	public abstract String[] getArtistas();
@@ -24,7 +28,7 @@ public abstract class Evento {
 	public abstract int numActuacoes(String artista);
 	
 	public String toString() {
-		return this.nome+" com "+getNumBilhetes()+ " bilhetes e com os artistas "+Arrays.toString(getArtistas());
+		return getNome()+" com "+getNumBilhetes()+ " bilhetes e com os artistas "+Arrays.toString(getArtistas());
 	}
 
 }
