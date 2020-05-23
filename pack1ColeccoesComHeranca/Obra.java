@@ -83,16 +83,24 @@ public abstract class Obra {
 	 */
 	public static String removeExtraSpaces(String nome) {
 		
+		// Forma mais simples de o fazer
+		// nome = nome.trim().replaceAll("\\s+", " ");
 		StringBuilder strNome = new StringBuilder();
+		// Outra Forma de o fazer
+		//String strNome = "";
 		char[] chars = nome.trim().toCharArray();
 		for (int i = 0; i < chars.length; i++) {
 			if (Character.isLetter(chars[i])
 					|| (!Character.isWhitespace(chars[i - 1]) && Character.isWhitespace(chars[i]))) {
 				strNome.append(chars[i]);
+				// Outra Forma de o fazer
+				//strNome += chars[i];
 			}
 		}
 		nome = strNome.toString();
 		return nome;
+		// Outra Forma de o fazer
+		//return strNome;
 	}
 
 	/**
