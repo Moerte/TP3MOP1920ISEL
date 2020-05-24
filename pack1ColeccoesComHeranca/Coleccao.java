@@ -7,10 +7,7 @@ import java.util.Arrays;
  * livros, colecções e editores. Deve utilizar herança para guardar os livros e
  * as colecções num só array
  */
-public class Coleccao extends Obra {
-	// prefixo a colocar no início de cada print mais interno que o corrente
-	public static final String GENERALPREFIX = "  ";
-
+public class Coleccao extends Obra implements IColeccao {
 	// número máximo de obras de uma colecção
 	private static int MAXOBRAS = 20;
 
@@ -55,6 +52,7 @@ public class Coleccao extends Obra {
 	 * Obtem o número total de páginas da colecção, páginas dos livros e das
 	 * colecções
 	 */
+	@Override
 	public int getNumPaginas() {
 
 		int numPag = 0;
@@ -73,6 +71,7 @@ public class Coleccao extends Obra {
 	 * desconto de 10% sobre os preços das suas subcolecções
 	 */
 
+	@Override
 	public float getPreco() {
 
 		float preco = 0;
@@ -93,6 +92,7 @@ public class Coleccao extends Obra {
 	 * ficar com obras com iguais no seu nível imediato. Deve utilizar o método
 	 * getIndexOfLivro e getIndexOfColeccao
 	 */
+	@Override
 	public boolean addObra(Obra l1) {
 
 		if (l1 != null && getIndexOfObra(l1.getTitulo()) == -1) {
@@ -130,10 +130,11 @@ public class Coleccao extends Obra {
 	 * getIndexOfLivro. Recorda-se que as obras ocupam sempre os menores índices, ou
 	 * seja, não pode haver nulls entre elas.
 	 */
-	public Obra remObra(String titulo) {
+	@Override
+	public IObra remObra(String titulo) {
 
 		int index = getIndexOfObra(titulo);
-		Obra toRemove = (index == -1) ? null : this.obras[index];
+		IObra toRemove = (index == -1) ? null : this.obras[index];
 		if (index > -1) {
 			Obra[] newLivros = new Obra[this.obras.length - 1];
 			this.numObras--;
@@ -155,6 +156,7 @@ public class Coleccao extends Obra {
 	 * uma obra, ou false caso não tenha trealizado qualquer remoção. Deve utilizar
 	 * os métodos remObra e remAllObra.
 	 */
+	@Override
 	public boolean remAllObra(String titulo) {
 
 		int n = numObras;
@@ -172,6 +174,7 @@ public class Coleccao extends Obra {
 	 * Devolve o nº de obras de uma pessoa. Cada colecção deve contabilizar-se como
 	 * uma obra para os editores.
 	 */
+	@Override
 	public int getNumObrasFromPerson(String autorEditor) {
 
 		int countLivros = 0;
@@ -186,10 +189,10 @@ public class Coleccao extends Obra {
 
 		for (int i = 0; i < oLength; i++) {
 			if (obras[i] != null && obras[i] instanceof Coleccao) {
-				Coleccao c = (Coleccao) obras[i];
+				IColeccao c = (IColeccao) obras[i];
 				countLivros += c.getNumObrasFromPerson(autorEditor);
 			} else if (obras[i] != null && !(obras[i] instanceof Coleccao)) {
-				Livro l = (Livro) obras[i];
+				ILivro l = (ILivro) obras[i];
 				int autores = l.getAutores().length;
 				for (int j = 0; j < autores; j++) {
 					if (l.getAutores()[j].contains(autorEditor)) {
@@ -206,19 +209,20 @@ public class Coleccao extends Obra {
 	 * recebido é autor. O array devolvido não deve conter repetições, para excluir
 	 * as repetições devem utilizar o método mergeWithoutRepetitions
 	 */
-	public Livro[] getLivrosComoAutor(String autorNome) {
+	@Override
+	public ILivro[] getLivrosComoAutor(String autorNome) {
 		int count = 0;
 		for (int i = 0; i < this.obras.length; i++) {
-			if (this.obras[i] != null && this.obras[i] instanceof Livro) {
-				if (((Livro)this.obras[i]).contemAutor(autorNome))
+			if (this.obras[i] != null && this.obras[i] instanceof ILivro) {
+				if (((ILivro)this.obras[i]).contemAutor(autorNome))
 					count++;
 			}
 		}
-		Livro[] newList = new Livro[count];
+		ILivro[] newList = new ILivro[count];
 		for (int i = 0; i < numObras; i++) {
-			if (this.obras[i] != null && this.obras[i] instanceof Livro) {
-				if (((Livro)this.obras[i]).contemAutor(autorNome))
-					newList[i] = (Livro) obras[i];
+			if (this.obras[i] != null && this.obras[i] instanceof ILivro) {
+				if (((ILivro)this.obras[i]).contemAutor(autorNome))
+					newList[i] = (ILivro) obras[i];
 			}
 		}
 		return newList;
@@ -229,13 +233,14 @@ public class Coleccao extends Obra {
 	 * na colecção. O resultado não deve conter repetições. Deve utilizar o método
 	 * mergeWithoutRepetitions
 	 */
+	@Override
 	public String[] getAutoresEditores() {
 		
 		String [] aux1 = editores;
 
 		for(int i=0; i<obras.length; i++) {
 			if(obras[i]!=null && !(obras[i] instanceof Coleccao)) {
-				Livro l = (Livro) obras[i];
+				ILivro l = (ILivro) obras[i];
 				aux1 = mergeWithoutRepetitions(aux1, l.getAutores());
 			}
 			else if(obras[i]!=null && (obras[i] instanceof Coleccao)){
@@ -287,9 +292,9 @@ public class Coleccao extends Obra {
 	/**
 	 * Método idêntico ao método anterior mas agora com arrays de livros
 	 */
-	private static Livro[] mergeWithoutRepetitions(Livro[] a1, Livro[] a2) {
+	private static ILivro[] mergeWithoutRepetitions(ILivro[] a1, ILivro[] a2) {
 
-		Livro[] test = new Livro[a1.length + a2.length];
+		ILivro[] test = new ILivro[a1.length + a2.length];
 		int current = 0;
 		for (int i = 0; i < a1.length; i++) {
 			if (a1[i] != null)
@@ -313,7 +318,7 @@ public class Coleccao extends Obra {
 				continue;
 			}
 		}
-		Livro[] result = new Livro[current];
+		ILivro[] result = new ILivro[current];
 		for (int i = 0; i < current; i++) {
 			result[i] = test[i];
 		}
@@ -323,13 +328,14 @@ public class Coleccao extends Obra {
 	/**
 	 * Devolve o nº de livros dentro da colecção
 	 */
+	@Override
 	public int getNumLivros() {
 		int numLivros = 0;
 		for (int i = 0; i < numObras; i++) {
-			if (this.obras[i] instanceof Livro)
+			if (this.obras[i] instanceof ILivro)
 				numLivros++;
 			if(this.obras[i] instanceof Coleccao) 
-				numLivros += ((Coleccao)this.obras[i]).getNumLivros();
+				numLivros += ((IColeccao)this.obras[i]).getNumLivros();
 		}
 		return numLivros;
 	}
@@ -337,25 +343,9 @@ public class Coleccao extends Obra {
 	/**
 	 * Devolve o nº de colecções dentro da colecção
 	 */
+	@Override
 	public int getNumColeccoes() {
 		
-		/*
-		 * if (numColeccoes == 0) return 0;
-		 * 
-		 * // para conter o valor mínimo dos stocks de todos os produtos int minStock =
-		 * 0;
-		 * 
-		 * // inicializar o minStock com o stock do primeiro produto int i = 0; for (; i
-		 * < coleccoes.length; i++) { if (coleccoes[i] != null) { minStock =
-		 * coleccoes[i].getNumColeccoes(); i++; break; } }
-		 * 
-		 * // percorrer o array até se ter consultado os nProdutos produtos for (int
-		 * nprods = 1; i < coleccoes.length && nprods < numColeccoes; i++) { if
-		 * (coleccoes[i] != null) { // se este produto tiver um stock inferior ao
-		 * mínimo, colocá-lo // como mínimo if (coleccoes[i].getNumColeccoes() <
-		 * minStock) minStock = coleccoes[i].getNumColeccoes(); } } return minStock;
-		 */
-
 		int numColecoes = 0;
 		for (int i = 0; i < numObras; i++) {
 			if (this.obras[i] instanceof Coleccao)
@@ -371,13 +361,14 @@ public class Coleccao extends Obra {
 	 * devolver 2 e c2 deve devolver 1, independentemente do número do conteúdo de
 	 * cada uma.
 	 */
+	@Override
 	public int getProfundidade() {
 
 		int total = 0;
 		total += 1;
 		for (int i = 0; i < obras.length; i++) {
 			if (obras[i] != null && obras[i] instanceof Coleccao) {
-				Coleccao c = (Coleccao) obras[i];
+				IColeccao c = (IColeccao) obras[i];
 				total += c.getProfundidade();
 			}
 		}
@@ -389,6 +380,7 @@ public class Coleccao extends Obra {
 	 * editores. Deve utilizar o equals da classe Obra. Para verificar verificar se
 	 * os editores são os mesmos devem utilizar o método mergeWithoutRepetitions
 	 */
+	@Override
 	public boolean equals(Object c) {
 		String[] test = mergeWithoutRepetitions(this.editores, ((Coleccao) c).editores);
 		return super.equals(c) && (test.length == this.editores.length && test.length == ((Coleccao) c).editores.length);
@@ -397,6 +389,7 @@ public class Coleccao extends Obra {
 	/**
 	 * Deve devolver uma string compatível com os outputs desejados
 	 */
+	@Override
 	public String toString() {
 
 		return super.toString() + Arrays.toString(getAutoresEditores()) + ", com " + getNumLivros() + " livros, com "
@@ -407,15 +400,16 @@ public class Coleccao extends Obra {
 	 * Mostra uma colecção segundo os outputs desejados. Deve utilizar o método
 	 * print da classe Obra.
 	 */
+	@Override
 	public void print(String prefix) {
 		System.out.println(prefix + this);
 		for (int j = 0; j < this.obras.length; j++) {
-			if (this.obras[j] != null && this.obras[j] instanceof Livro)
+			if (this.obras[j] != null && this.obras[j] instanceof ILivro)
 				((Livro) this.obras[j]).print(" " + prefix);
 		}
 		for (int i = 0; i < numObras; i++) {
 			if (this.obras[i] != null && this.obras[i] instanceof Coleccao)
-				((Coleccao) this.obras[i]).print(" " + prefix);
+				((IColeccao) this.obras[i]).print(" " + prefix);
 		}
 	}
 
@@ -472,7 +466,7 @@ public class Coleccao extends Obra {
 
 		// getLivrosComoAutor
 		nome = "João Mendonça";
-		Livro[] livros = c1.getLivrosComoAutor(nome);
+		ILivro[] livros = c1.getLivrosComoAutor(nome);
 		System.out.println("Livros de " + nome + " -> " + Arrays.toString(livros));
 		System.out.println();
 		System.out.println();
@@ -489,9 +483,20 @@ public class Coleccao extends Obra {
 
 		// rem livro
 		String nomeLivro = "Viagem aos Himalaias";
-		Obra l = c1.remObra(nomeLivro);
+		IObra l = c1.remObra(nomeLivro);
 		System.out.println("Remoção de " + nomeLivro + " -> " + l);
 		c1.print("");
 
+		// teste ao mergeWithoutRepetitions com livros
+		System.out.println();
+		ILivro book1 = new Livro("Codex 632", 33, 22.2f, new String[] {"José Rodrigues dos Santos"});
+		ILivro book2 = new Livro("Eu Robot", 33, 22.2f, new String[] {"Isaac Asimov"});
+		ILivro book3 = new Livro("Fundação", 33, 22.2f, new String[] {"Isaac Asimov"});
+		ILivro[] bookArr = {book1, book2};
+		ILivro[] bookArr2 = {book2, book3};	
+		ILivro[] mergedBooks = mergeWithoutRepetitions(bookArr, bookArr2);
+		System.out.println("Livros de bookArr: "+ Arrays.toString(bookArr));
+		System.out.println("Livros de bookArr2: "+ Arrays.toString(bookArr2));
+		System.out.println("Livros fundidos: "+ Arrays.toString(mergedBooks));
 	}
 }

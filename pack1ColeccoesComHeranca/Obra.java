@@ -1,6 +1,6 @@
 package tps.tp3.pack1ColeccoesComHeranca;
 
-public abstract class Obra {
+public abstract class Obra implements IObra {
 
 	private String titulo;
 
@@ -18,20 +18,23 @@ public abstract class Obra {
 	/**
 	 * Devolve o título da obra
 	 */
+	@Override
 	public String getTitulo() {
 
 		 return this.titulo;
 	}
 
-	/**
-	 * Devolve o número de páginas da obra
-	 */
-	public abstract int getNumPaginas();
-
-	/**
-	 * Devolve o preço da obra
-	 */
-	public abstract float getPreco();
+//	/**
+//	 * Devolve o número de páginas da obra
+//	 */
+//	@Override
+//	public abstract int getNumPaginas();
+//
+//	/**
+//	 * Devolve o preço da obra
+//	 */
+//	@Override
+//	public abstract float getPreco();
 
 	/**
 	 * Deve devolver true se o array conter apenas nomes válidos. Cada nome deve ser
@@ -116,6 +119,7 @@ public abstract class Obra {
 	 * Devolve uma string com a informação da obra (ver outputs desejados e método
 	 * toString de Livro)
 	 */
+	@Override
 	public String toString() {
 		return getTitulo() + ", " + getNumPaginas()+ "p, " + getPreco() + "€, ";
 		
@@ -125,6 +129,7 @@ public abstract class Obra {
 	 * Deve mostrar na consola a informação da obra (toString) precedida do prefixo
 	 * recebido
 	 */
+	@Override
 	public void print(String prefix) {
 		System.out.println(prefix + this);
 	}
@@ -133,8 +138,9 @@ public abstract class Obra {
 	 * O Object recebido é igual, se não for null, se for uma obra e se tiver o
 	 * mesmo título que o título da obra corrente
 	 */
+	@Override
 	public boolean equals(Object l) {
-		return (l != null) && this.getTitulo().equalsIgnoreCase(((Obra) l).getTitulo());
+		return (l != null) && this.getTitulo().equalsIgnoreCase(((IObra) l).getTitulo());
 		
 	}
 

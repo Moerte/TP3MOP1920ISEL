@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Classe que deverá suportar um livro
  */
-public class Livro extends Obra {
+public class Livro extends Obra implements ILivro {
 
 	// número de páginas
 	private int numPaginas;
@@ -27,8 +27,6 @@ public class Livro extends Obra {
 	 */
 	public Livro(String titulo, int numPaginas, float preco, String[] autores) {
 	
-
-
 		// título
 		super(titulo);
 		
@@ -65,6 +63,7 @@ public class Livro extends Obra {
 	/**
 	 * Devolve o número de páginas do livro
 	 */
+	@Override
 	public int getNumPaginas() {
 		
 		return this.numPaginas;
@@ -73,6 +72,7 @@ public class Livro extends Obra {
 	/**
 	 * Devolve o preço do livro
 	 */
+	@Override
 	public float getPreco() {
 		
 		return this.preco;
@@ -82,6 +82,7 @@ public class Livro extends Obra {
 	 * Devolve true se o autor recebido existe como autor do livro. O nome
 	 * recebido não contém espaços extra.
 	 */
+	@Override
 	public boolean contemAutor(String autorNome) {
 		
 		String[] autoresToCheck = this.getAutores();
@@ -96,6 +97,7 @@ public class Livro extends Obra {
 	/**
 	 * Devolve uma cópia do array de autores do livro
 	 */
+	@Override
 	public String[] getAutores() {
 		
 		return autores; 
@@ -104,6 +106,7 @@ public class Livro extends Obra {
 	/**
 	 * Devolve uma string com a informação do livro (ver outputs desejados)
 	 */
+	@Override
 	public  String toString() {
 		return super.toString() + Arrays.toString(getAutores());
 	}
@@ -112,8 +115,9 @@ public class Livro extends Obra {
 	 * Iguais se equais no contexto de obra e se o objecto recebido for um Livro.
 	 * Deve utilizar o método equals de Obra
 	 */
+	@Override
 	public boolean equals(Object l) {
-		return (l != null) && this.getTitulo().equalsIgnoreCase(((Obra) l).getTitulo());
+		return (l != null) && this.getTitulo().equalsIgnoreCase(((IObra) l).getTitulo());
 	}
 	
 
@@ -143,7 +147,7 @@ public class Livro extends Obra {
 		System.out.println("equals Livro: " + l);
 		System.out.println(" -> " + l.equals(l));
 
-		Livro l2 = new Livro("Viagem aos Himalaias", 100, 10.3f,
+		ILivro l2 = new Livro("Viagem aos Himalaias", 100, 10.3f,
 				new String[] { "Vitor Záspara" });
 		System.out.println("Livro: " + l);
 		System.out.println("equals Livro: " + l2);
@@ -155,7 +159,7 @@ public class Livro extends Obra {
 		// livro lx1
 		System.out.println("Livro lx1: ");
 		try {
-			Livro lx1 = new Livro("Viagem aos Himalaias", -1, 12.3f,
+			ILivro lx1 = new Livro("Viagem aos Himalaias", -1, 12.3f,
 					new String[] { "João Mendonça", "Mário Andrade" });
 			System.out.println("Livro lx1: " + lx1);
 		} catch (IllegalArgumentException ex) {
@@ -166,7 +170,7 @@ public class Livro extends Obra {
 		// livro lx2
 		System.out.println("Livro lx2: ");
 		try {
-			Livro lx2 = new Livro("Viagem aos Himalaias", 200, -12.3f,
+			ILivro lx2 = new Livro("Viagem aos Himalaias", 200, -12.3f,
 					new String[] { "João Mendonça", "Mário Andrade" });
 			System.out.println("Livro lx2: " + lx2);
 		} catch (IllegalArgumentException ex) {
@@ -177,7 +181,7 @@ public class Livro extends Obra {
 		// livro lx3
 		System.out.println("Livro lx3: ");
 		try {
-			Livro lx3 = new Livro(null, 200, -12.3f,
+			ILivro lx3 = new Livro(null, 200, -12.3f,
 					new String[] { "João Mendonça", "Mário Andrade" });
 			System.out.println("Livro lx3: " + lx3);
 		} catch (IllegalArgumentException ex) {
@@ -188,7 +192,7 @@ public class Livro extends Obra {
 		// livro lx4
 		System.out.println("Livro lx4: ");
 		try {
-			Livro lx4 = new Livro("Viagem aos Himalaias", 200, 12.3f,
+			ILivro lx4 = new Livro("Viagem aos Himalaias", 200, 12.3f,
 					new String[] { "João Mendonça", "Mário Andrade",
 							"João Mendonça" });
 			System.out.println("Livro lx4: " + lx4);
