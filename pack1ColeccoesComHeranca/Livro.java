@@ -3,53 +3,55 @@ package tps.tp3.pack1ColeccoesComHeranca;
 import java.util.Arrays;
 
 /**
- * Classe que dever· suportar um livro
+ * Classe que dever√° suportar um livro
  */
 public class Livro extends Obra {
 
-	// n˙mero de p·ginas
+	// n√∫mero de p√°ginas
 	private int numPaginas;
 
-	// preÁo do livro
+	// pre√ßo do livro
 	private float preco;
 
-	// array de autores, este array n„o deve ter nulls
+	// array de autores, este array n√£o deve ter nulls
 	private String[] autores;
 
 	/**
-	 * Deve criar um novo livro com os dados recebidos. O n˙mero de p·ginas n„o
-	 * pode ser menor que 1. O preÁo n„o pode ser negativo. O array de autores
-	 * n„o deve conter nem nulls e deve conter pelo menos um autor v·lido. N„o
-	 * pode haver repetiÁıes dos nomes dos autores, considera-se os nomes sem os
-	 * espaÁos extra (ver removeExtraSpaces). Este mÈtodo deve utilizar os
-	 * mÈtodos auxiliares existentes. Em caso de nome inv·lido deve lanÁar uma
-	 * excepÁ„o de IllegalArgumentException com a indicaÁ„o do erro ocorrido
+	 * Deve criar um novo livro com os dados recebidos. O n√∫mero de p√°ginas n√£o
+	 * pode ser menor que 1. O pre√ßo n√£o pode ser negativo. O array de autores
+	 * n√£o deve conter nem nulls e deve conter pelo menos um autor v√°lido. N√£o
+	 * pode haver repeti√ß√µes dos nomes dos autores, considera-se os nomes sem os
+	 * espa√ßos extra (ver removeExtraSpaces). Este m√©todo deve utilizar os
+	 * m√©todos auxiliares existentes. Em caso de nome inv√°lido deve lan√ßar uma
+	 * excep√ß√£o de IllegalArgumentException com a indica√ß√£o do erro ocorrido
 	 */
 	public Livro(String titulo, int numPaginas, float preco, String[] autores) {
-		// TODO
-		// tÌtulo
+	
+
+
+		// t√≠tulo
 		super(titulo);
 		
 		if (titulo == null || titulo.length() == 0)
 			throw new IllegalArgumentException("O titulo tem de ter pelo menos um caracter");
 		if (!Obra.validarNome(titulo))
-			throw new IllegalArgumentException("O nome do tÌtulo È inv·lido");
+			throw new IllegalArgumentException("O nome do t√≠tulo √© inv√°lido");
 		
-		// p·ginas
+		// p√°ginas
 		if (numPaginas < 1)
-			throw new IllegalArgumentException("O n∫ de p·ginas n„o pode ser negativo");
+			throw new IllegalArgumentException("O n¬∫ de p√°ginas n√£o pode ser negativo");
 		
-		// preÁo
+		// pre√ßo
 		if (preco < 0)
-			throw new IllegalArgumentException("O preÁo n„o pode ser negativo");
+			throw new IllegalArgumentException("O pre√ßo n√£o pode ser negativo");
 		
 		// autores 
 		if(autores == null || autores.length < 1)
 			throw new IllegalArgumentException("Tem de haver pelo menos um autor");
 		if(!Obra.validarNomes(autores))
-			throw new IllegalArgumentException("O autor tem de ter o nome v·lido");
+			throw new IllegalArgumentException("O autor tem de ter o nome v√°lido");
 		if(!Obra.haRepeticoes(autores))
-			throw new IllegalArgumentException("O array de autores contÈm autores repetidos");
+			throw new IllegalArgumentException("O array de autores cont√©m autores repetidos");
 		for (int i = 0; i < autores.length; i++) {
 			autores[i] = Obra.removeExtraSpaces(autores[i]);
 		}
@@ -61,7 +63,7 @@ public class Livro extends Obra {
 	}
 
 	/**
-	 * Devolve o n˙mero de p·ginas do livro
+	 * Devolve o n√∫mero de p√°ginas do livro
 	 */
 	public int getNumPaginas() {
 		
@@ -69,7 +71,7 @@ public class Livro extends Obra {
 	}
 
 	/**
-	 * Devolve o preÁo do livro
+	 * Devolve o pre√ßo do livro
 	 */
 	public float getPreco() {
 		
@@ -78,10 +80,10 @@ public class Livro extends Obra {
 
 	/**
 	 * Devolve true se o autor recebido existe como autor do livro. O nome
-	 * recebido n„o contÈm espaÁos extra.
+	 * recebido n√£o cont√©m espa√ßos extra.
 	 */
 	public boolean contemAutor(String autorNome) {
-		// TODO
+		
 		String[] autoresToCheck = this.getAutores();
 		int count = 0;
 		for (int i = 0; i < autoresToCheck.length; i++) {
@@ -92,7 +94,7 @@ public class Livro extends Obra {
 	}
 
 	/**
-	 * Devolve uma cÛpia do array de autores do livro
+	 * Devolve uma c√≥pia do array de autores do livro
 	 */
 	public String[] getAutores() {
 		
@@ -100,7 +102,7 @@ public class Livro extends Obra {
 	}
 
 	/**
-	 * Devolve uma string com a informaÁ„o do livro (ver outputs desejados)
+	 * Devolve uma string com a informa√ß√£o do livro (ver outputs desejados)
 	 */
 	public  String toString() {
 		return super.toString() + Arrays.toString(getAutores());
@@ -108,7 +110,7 @@ public class Livro extends Obra {
 
 	/**
 	 * Iguais se equais no contexto de obra e se o objecto recebido for um Livro.
-	 * Deve utilizar o mÈtodo equals de Obra
+	 * Deve utilizar o m√©todo equals de Obra
 	 */
 	public boolean equals(Object l) {
 		return (l != null) && this.getTitulo().equalsIgnoreCase(((Obra) l).getTitulo());
@@ -123,16 +125,16 @@ public class Livro extends Obra {
 
 		// constructor e toString
 		Livro l = new Livro("Viagem aos Himalaias", 340, 12.3f,
-				new String[] { "Jo„o MendonÁa", "M·rio Andrade" });
+				new String[] { "Jo√£o Mendon√ßa", "M√°rio Andrade" });
 		System.out.println("Livro -> " + l);
 		l.print("");
 		l.print("-> ");
 		System.out.println();
 
-		// contÈm autor
-		String autorNome = "M·rio Andrade";
+		// cont√©m autor
+		String autorNome = "M√°rio Andrade";
 		System.out.println("Livro com o autor " + autorNome + "? -> " + l.contemAutor(autorNome));
-		autorNome = "M·rio Zambujal";
+		autorNome = "M√°rio Zambujal";
 		System.out.println("Livro com o autor " + autorNome + "? -> " + l.contemAutor(autorNome));
 		System.out.println();
 
@@ -142,19 +144,19 @@ public class Livro extends Obra {
 		System.out.println(" -> " + l.equals(l));
 
 		Livro l2 = new Livro("Viagem aos Himalaias", 100, 10.3f,
-				new String[] { "Vitor Z·spara" });
+				new String[] { "Vitor Z√°spara" });
 		System.out.println("Livro: " + l);
 		System.out.println("equals Livro: " + l2);
 		System.out.println(" -> " + l.equals(l2));
 		System.out.println();
 
-		// testes que d„o excepÁ„o - mostra-se a excepÁ„o
+		// testes que d√£o excep√ß√£o - mostra-se a excep√ß√£o
 
 		// livro lx1
 		System.out.println("Livro lx1: ");
 		try {
 			Livro lx1 = new Livro("Viagem aos Himalaias", -1, 12.3f,
-					new String[] { "Jo„o MendonÁa", "M·rio Andrade" });
+					new String[] { "Jo√£o Mendon√ßa", "M√°rio Andrade" });
 			System.out.println("Livro lx1: " + lx1);
 		} catch (IllegalArgumentException ex) {
 			ex.printStackTrace();
@@ -165,7 +167,7 @@ public class Livro extends Obra {
 		System.out.println("Livro lx2: ");
 		try {
 			Livro lx2 = new Livro("Viagem aos Himalaias", 200, -12.3f,
-					new String[] { "Jo„o MendonÁa", "M·rio Andrade" });
+					new String[] { "Jo√£o Mendon√ßa", "M√°rio Andrade" });
 			System.out.println("Livro lx2: " + lx2);
 		} catch (IllegalArgumentException ex) {
 			ex.printStackTrace();
@@ -176,7 +178,7 @@ public class Livro extends Obra {
 		System.out.println("Livro lx3: ");
 		try {
 			Livro lx3 = new Livro(null, 200, -12.3f,
-					new String[] { "Jo„o MendonÁa", "M·rio Andrade" });
+					new String[] { "Jo√£o Mendon√ßa", "M√°rio Andrade" });
 			System.out.println("Livro lx3: " + lx3);
 		} catch (IllegalArgumentException ex) {
 			ex.printStackTrace();
@@ -187,8 +189,8 @@ public class Livro extends Obra {
 		System.out.println("Livro lx4: ");
 		try {
 			Livro lx4 = new Livro("Viagem aos Himalaias", 200, 12.3f,
-					new String[] { "Jo„o MendonÁa", "M·rio Andrade",
-							"Jo„o MendonÁa" });
+					new String[] { "Jo√£o Mendon√ßa", "M√°rio Andrade",
+							"Jo√£o Mendon√ßa" });
 			System.out.println("Livro lx4: " + lx4);
 		} catch (IllegalArgumentException ex) {
 			ex.printStackTrace();
